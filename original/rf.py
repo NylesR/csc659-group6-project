@@ -77,7 +77,7 @@ best_oob = 0
 
 # Grid search through all combinations of hyperparameters
 for trees in n_trees:
-    print("============================================")
+    print("="*45)
     for depth in max_depths:
         # Create and train Random Forest with current hyperparameters
         clf = RandomForestClassifier(n_estimators=trees, max_depth=depth, random_state=rf_settings['random_state'], oob_score=rf_settings['oob_score'])
@@ -93,7 +93,7 @@ for trees in n_trees:
         
         print(f"Trees: {trees}, Max Depth: {depth}, OOB Score: {oob_score:.3f}")
 
-print("============================================")
+print("="*45)
 print(f"Best OOB Score: {best_oob:.3f}")
 
 # Perform cross-validation on the best model using the full dataset
