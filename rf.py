@@ -107,9 +107,23 @@ print(f"Mean CV score: {cv_scores.mean():.3f}")
 # Make predictions on the test set using the best model
 y_pred = best_model.predict(X_test)
 
-# Calculate and display key performance metrics
-print(f"F1 Score: {f1_score(y_test, y_pred, average=rf_settings['f1_average'])}")
-print(f"Accuracy:{accuracy_score(y_test, y_pred):.3f}")
+# Calculate performance metrics
+f1 = f1_score(y_test, y_pred, average=rf_settings['f1_average'])
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred, average=rf_settings['f1_average'])
+recall = recall_score(y_test, y_pred, average=rf_settings['f1_average'])
+
+# Create and display performance metrics table
+print("MODEL PERFORMANCE METRICS")
+print("-"*60)
+print(f"{'Metric':<25} {'Value':<15} {'Description':<20}")
+print("-"*60)
+print(f"{'Cross-Validation Mean':<25} {cv_scores.mean():<15.3f} {'Average CV Score':<20}")
+print(f"{'Accuracy':<25} {accuracy:<15.3f} {'Overall Accuracy':<20}")
+print(f"{'F1 Score':<25} {f1:<15.3f} {'Harmonic Mean':<20}")
+print(f"{'Precision':<25} {precision:<15.3f} {'Positive Predictive Value':<20}")
+print(f"{'Recall':<25} {recall:<15.3f} {'Sensitivity':<20}")
+print("-"*60)
 
 # Create and display confusion matrix to understand classification performance
 cm = confusion_matrix(y_test, y_pred)
